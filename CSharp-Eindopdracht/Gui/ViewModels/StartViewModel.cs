@@ -27,6 +27,7 @@ namespace Gui.ViewModels
                 {
                     MainViewModel.SelectedViewModel = new GameViewModel(this.MainViewModel);
                     MainViewModel.players.Add(new Models.Player(Name));
+                   
                 }
             });
 
