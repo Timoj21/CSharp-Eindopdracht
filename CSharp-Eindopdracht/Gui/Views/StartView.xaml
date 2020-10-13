@@ -12,9 +12,9 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label x:Name="enterNameLabel" Grid.Row="0" Height="30" Width="200" Content="Enter name: "/>
-        <TextBox x:Name="nameTextBox" Grid.Row="0" Height="30" Width="200"/>
-        <Button x:Name="joinGameButton" Grid.Row="1" Content="Join Game"/>
-        <Button x:Name="hostGameButton" Grid.Row="2" Content="Host Game"/>
+        <Label x:Name="enterNameLabel" Grid.Row="0" Height="30" Width="200" Content="Enter name: " VerticalAlignment="Top"/>
+        <TextBox x:Name="nameTextBox" Grid.Row="0" Height="30" Width="200" VerticalAlignment="Bottom" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button x:Name="joinGameButton" Grid.Row="1" Content="Join Game" Command="{Binding Path=joinGameCommand}"/>
+        <Button x:Name="hostGameButton" Grid.Row="2" Content="Host Game" Command="{Binding Path=hostGameCommand}"/>
     </Grid>
 </UserControl>

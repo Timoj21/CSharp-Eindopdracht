@@ -1,11 +1,43 @@
-﻿using Gui.Utils;
+﻿using GalaSoft.MvvmLight.Command;
+using Gui.Utils;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 
 namespace Gui.ViewModels
 {
     public class StartViewModel : ObserverableObject
     {
+        private MainViewModel MainViewModel{ get; set;}
+        public ICommand joinGameCommand { get; set; }
+
+        public ICommand hostGameCommand { get; set; }
+
+        public string Name { get; set; }
+   
+
+        public StartViewModel(MainViewModel mainViewModel)
+        {
+
+            MainViewModel = mainViewModel;  
+            joinGameCommand = new RelayCommand(() =>
+            {
+                if (Name != null)
+                {
+                    MainViewModel.SelectedViewModel = new GameViewModel();
+                }
+            });
+
+            hostGameCommand = new RelayCommand(() =>
+            {
+                if (Name != null)
+                {
+                    MainViewModel.SelectedViewModel = new GameViewModel();
+                }
+            });
+        }
+
+
     }
 }

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Gui"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="Zeeslag" Height="600" Width="600">
+        Title="Zeeslag" Height="600" Width="800">
     <Grid>
         <ContentControl Content="{Binding SelectedViewModel}"/>
     </Grid>
