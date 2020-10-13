@@ -23,7 +23,7 @@ namespace Gui.ViewModels
             MainViewModel = mainViewModel;  
             joinGameCommand = new RelayCommand(() =>
             {
-                if (Name != null)
+                if (Name != null && Name.Length > 0)
                 {
                     MainViewModel.SelectedViewModel = new GameViewModel();
                 }
@@ -31,7 +31,7 @@ namespace Gui.ViewModels
 
             hostGameCommand = new RelayCommand(() =>
             {
-                if (Name != null)
+                if (Name != null && Name.Length > 0)
                 {
                     MainViewModel.SelectedViewModel = new GameViewModel();
                 }

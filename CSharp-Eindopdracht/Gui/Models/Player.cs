@@ -10,5 +10,9 @@ namespace Gui.Models
         public event PropertyChangedEventHandler PropertyChanged;
 
         public string Name { get; set; }
+
+        public List<string> boatPositions { get; set; }
+
+
     }
 }
