@@ -4,7 +4,10 @@ using System.Text;
 
 namespace Gui.Models
 {
-    class FieldOccupation
+    public enum FieldOccupation
     {
+        Free,
+        Occupied,
+        Destroyed
     }
 }

@@ -13,6 +13,9 @@ namespace Gui.Models
 
         public List<string> boatPositions { get; set; }
 
-
+        public Player(string name)
+        {
+            this.Name = name;
+        }
     }
 }

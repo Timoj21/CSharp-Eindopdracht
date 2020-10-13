@@ -20,12 +20,13 @@ namespace Gui.ViewModels
         public StartViewModel(MainViewModel mainViewModel)
         {
 
-            MainViewModel = mainViewModel;  
+            this.MainViewModel = mainViewModel;  
             joinGameCommand = new RelayCommand(() =>
             {
                 if (Name != null && Name.Length > 0)
                 {
-                    MainViewModel.SelectedViewModel = new GameViewModel();
+                    MainViewModel.SelectedViewModel = new GameViewModel(this.MainViewModel);
+                    MainViewModel.players.Add(new Models.Player(Name));
                 }
             });
 
@@ -33,7 +34,8 @@ namespace Gui.ViewModels
             {
                 if (Name != null && Name.Length > 0)
                 {
-                    MainViewModel.SelectedViewModel = new GameViewModel();
+                    MainViewModel.SelectedViewModel = new GameViewModel(this.MainViewModel);
+                    MainViewModel.players.Add(new Models.Player(Name));
                 }
             });
         }
