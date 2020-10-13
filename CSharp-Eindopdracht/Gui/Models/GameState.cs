@@ -4,7 +4,11 @@ using System.Text;
 
 namespace Gui.Models
 {
-    class GameState
+    public enum GameState
     {
+        Waiting,
+        Choosing,
+        Started,
+        Ended
     }
 }

@@ -1,4 +1,5 @@
-﻿using Gui.Utils;
+﻿using Gui.Models;
+using Gui.Utils;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,10 +10,15 @@ namespace Gui.ViewModels
     {
         private MainViewModel MainViewModel { get; set; }
 
+       
+
+
         public GameViewModel(MainViewModel mainViewModel)
         {
             this.MainViewModel = mainViewModel;
         }
+
+
     }
 
 
