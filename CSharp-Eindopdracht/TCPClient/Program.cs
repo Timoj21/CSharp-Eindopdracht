@@ -11,7 +11,7 @@ namespace TCPClient
         {
             bool stopreceived = false;
             Console.WriteLine("Looking for connection");
-            TcpClient client = new TcpClient("", 5252);
+            TcpClient client = new TcpClient("192.168.99.144", 5252);
             Console.WriteLine("Type (stop) to stop connection");
             while (!stopreceived)
             {

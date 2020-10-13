@@ -5,49 +5,62 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 
-
-
 namespace TCPServer
 {
     class Program
     {
         static void Main(string[] args)
         {
-            bool TryIp;
-            IPAddress localhost = IPAddress.TryParse("", out TryIp );
-            TcpListener tcplistener = new TcpListener(localhost, 5252);
+            Console.WriteLine("Server started!");
+            IPAddress localhost = IPAddress.Parse("192.168.99.144");
+            TcpListener listener1 = new TcpListener(localhost, 5252);
+            listener1.Start();
 
-            tcplistener.Start();
-
-            while(true)
+            while (true)
             {
-
+                Console.WriteLine("Waiting for connection");
+                TcpClient client = listener1.AcceptTcpClient();
+                Thread thread = new Thread(HandleClientThread);
+                thread.Start(client);
             }
 
         }
 
-        public static Encoding encoding = Encoding.UTF8;
-
-        public static string ReadTextMessage(NetworkStream networkStream)
+        static void HandleClientThread(object obj)
         {
-            StreamReader stream = new StreamReader(networkStream, encoding);
-            return stream.ReadLine();
-            var stream = new StreamReader(networkStream, encoding);
+            TcpClient client = obj as TcpClient;
+
+            bool ready = false;
+            while (!ready)
             {
-                return stream.ReadLine();
+                string received = ReadTextMessage(client);
+                Console.WriteLine("Received: {0}", received);
+
+                ready = received.Equals("stop");
+                if (ready) WriteTextMessage(client, "stop");
+                else WriteTextMessage(client, "Accepted");
             }
+            client.Close();
+            Console.WriteLine("Connection stopped");
         }
 
-        public static void WriteTextMessage(NetworkStream networkStream, string message)
+
+        public static void WriteTextMessage(TcpClient client, string message)
         {
-            StreamWriter stream = new StreamWriter(networkStream, encoding);
-            stream.WriteLine(message);
-            stream.Flush();
-            using (var stream = new StreamWriter(networkStream, encoding, -1, true))
+            var stream = new StreamWriter(client.GetStream(), Encoding.ASCII, -1, true);
             {
                 stream.WriteLine(message);
                 stream.Flush();
             }
         }
+
+        public static string ReadTextMessage(TcpClient client)
+        {
+            var stream = new StreamReader(client.GetStream(), Encoding.ASCII);
+            {
+                return stream.ReadLine();
+            }
+        }
+
     }
 }
