@@ -19,7 +19,7 @@
         
         <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
             <Label Content="Battle log"/>
-            <TextBlock TextWrapping="Wrap" Text="Hier moet de battle log in komen te staan tijdens het spelen van het spel"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding battlelogTextBlock}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">

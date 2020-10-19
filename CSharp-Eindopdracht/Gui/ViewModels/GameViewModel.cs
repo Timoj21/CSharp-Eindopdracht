@@ -9,6 +9,7 @@ namespace Gui.ViewModels
     public class GameViewModel : ObserverableObject
     {
         private MainViewModel MainViewModel { get; set; }
+        public string battlelogTextBlock { get; set; }
 
        
 
@@ -17,8 +18,6 @@ namespace Gui.ViewModels
         {
             this.MainViewModel = mainViewModel;
         }
-
-
     }
 
 
