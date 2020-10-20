@@ -12,7 +12,7 @@ namespace TCPServer
         static void Main(string[] args)
         {
             Console.WriteLine("Server started!");
-            IPAddress localhost = IPAddress.Parse("");
+            IPAddress localhost = IPAddress.Parse("192.168.99.144");
             TcpListener listener1 = new TcpListener(localhost, 5252);
             listener1.Start();
 

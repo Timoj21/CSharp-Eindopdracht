@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCPServer", "TCPServer\TCPS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCPClient", "TCPClient\TCPClient.csproj", "{F69F8810-10E2-4100-8218-F7B38A57FADB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerApplication", "Server\ServerApplication.csproj", "{B408EC63-C619-4454-A729-FF19BE595DE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerApplication", "Server\ServerApplication.csproj", "{B408EC63-C619-4454-A729-FF19BE595DE2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{81640029-C103-42E0-A046-0BD1B2B7DD1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileIO", "FileIO\FileIO.csproj", "{369FBBD3-F687-430E-BA55-5E8A02A6F970}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,10 @@ Global
 		{B408EC63-C619-4454-A729-FF19BE595DE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B408EC63-C619-4454-A729-FF19BE595DE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B408EC63-C619-4454-A729-FF19BE595DE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{369FBBD3-F687-430E-BA55-5E8A02A6F970}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{369FBBD3-F687-430E-BA55-5E8A02A6F970}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{369FBBD3-F687-430E-BA55-5E8A02A6F970}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{369FBBD3-F687-430E-BA55-5E8A02A6F970}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
