@@ -47,4 +47,12 @@ namespace EindopdrachtLib
         {
         public bool inGame;
         }
+
+    public class ChooseGridPackage : DAbstract
+    {
+        public string name;
+        public int game;
+        public Dictionary<string, bool> grid;
+
+    }
 }

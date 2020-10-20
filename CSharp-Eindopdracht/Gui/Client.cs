@@ -76,7 +76,7 @@ namespace Gui
                     }
                 case "CHOOSEGRIDRESPONSE":
                     {
-                        DataPacket<ChooseGridResponse> d = data.GetData<ChooseGridResponse>();
+                        //DataPacket<ChooseGridResponse> d = data.GetData<ChooseGridResponse>();
                         if (d.data.succeeded)
                         {
 
@@ -112,10 +112,10 @@ namespace Gui
 
         public void SendChooseGrid(string name, int game, Dictionary<string, bool> grid)
         {
-            SendData(new DataPacket<ChooseGridPacket>()
+            SendData(new DataPacket<ChooseGridPackage>()
             {
                 type = "CHOOSEGRID",
-                data = new ChooseGridPacket()
+                data = new ChooseGridPackage()
                 {
                     name = name,
                     game = game,
@@ -124,7 +124,7 @@ namespace Gui
             });
         }
 
-        public void SendData(DataPacket<ChooseGridPacket> data)
+        public void SendData(DataPacket<ChooseGridPackage> data)
         {
             // create the sendBuffer based on the message
             List<byte> sendBuffer = new List<byte>(Encoding.ASCII.GetBytes(JsonConvert.SerializeObject(data)));
