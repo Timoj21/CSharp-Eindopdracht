@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EindopdrachtLib;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
@@ -7,6 +9,8 @@ namespace Gui
 {
 
     public delegate void DataCallback(string data);
+    public delegate void InGameCallback(bool state);
+    public delegate void ChooseGridCallback(bool state);
     class Client
     {
         private TcpClient client;
@@ -14,6 +18,10 @@ namespace Gui
         private byte[] buffer = new byte[4];
 
         public event DataCallback OnDataReceived;
+        public event InGameCallback OnInGameReceived;
+        
+
+        private bool inGame = false;
 
         public Client()
         {
@@ -41,38 +49,110 @@ namespace Gui
         {
             string data = System.Text.Encoding.ASCII.GetString(this.buffer);
 
-            handleData(data);
+            DataPacket dataPacket = JsonConvert.DeserializeObject<DataPacket>(data);
+            HandleData(dataPacket);
 
             this.buffer = new byte[4];
             this.stream.BeginRead(this.buffer, 0, this.buffer.Length, new AsyncCallback(ReceiveLengthInt), null);
         }
 
-        private void handleData(string data)
+        private void HandleData(DataPacket data)
         {
-            switch (data)
+            switch (data.type)
             {
-                case "HOSTSUCCEED":
+                case "HOSTGAMERESPONSE":
                     {
-                        OnDataReceived?.Invoke(data);
+                        DataPacket<HostGameResponse> d = data.GetData<HostGameResponse>();
+                        this.inGame = d.data.inGame;
+                        OnInGameReceived?.Invoke(this.inGame);
                         break;
                     }
-                case "JOINSUCCEED":
+                case "JOINGAMERESPONSE":
                     {
-                        OnDataReceived?.Invoke(data);
+                        DataPacket<JoinGameResponse> d = data.GetData<JoinGameResponse>();
+                        this.inGame = d.data.inGame;
+                        OnInGameReceived?.Invoke(this.inGame);
                         break;
                     }
-                case "JOINFAILED":
+                case "CHOOSEGRIDRESPONSE":
                     {
-                        OnDataReceived?.Invoke(data);
+                        DataPacket<ChooseGridResponse> d = data.GetData<ChooseGridResponse>();
+                        if (d.data.succeeded)
+                        {
+
+                        }
                         break;
                     }
             }
         }
-        public void SendData(string message)
+
+        public void SendHostGame(string name)
+        {
+            SendData(new DataPacket<HostGamePacket>()
+            {
+                type = "HOSTGAME",
+                data = new HostGamePacket()
+                {
+                    name = name
+                }
+            });
+        }
+
+        public void SendJoinGame(string name)
+        {
+            SendData(new DataPacket<JoinGamePacket>()
+            {
+                type = "JOINGAME",
+                data = new JoinGamePacket()
+                {
+                    name = name
+                }
+            });
+        }
+
+        public void SendChooseGrid(string name, int game, Dictionary<string, bool> grid)
+        {
+            SendData(new DataPacket<ChooseGridPacket>()
+            {
+                type = "CHOOSEGRID",
+                data = new ChooseGridPacket()
+                {
+                    name = name,
+                    game = game,
+                    grid = grid
+                }
+            });
+        }
+
+        public void SendData(DataPacket<ChooseGridPacket> data)
+        {
+            // create the sendBuffer based on the message
+            List<byte> sendBuffer = new List<byte>(Encoding.ASCII.GetBytes(JsonConvert.SerializeObject(data)));
+
+            // append the message length (in bytes)
+            sendBuffer.InsertRange(0, BitConverter.GetBytes(sendBuffer.Count));
+
+            // send the message
+            this.stream.Write(sendBuffer.ToArray(), 0, sendBuffer.Count);
+        }
+
+        public void SendData(DataPacket<HostGamePacket> data)
         {
           // create the sendBuffer based on the message
-            List<byte> sendBuffer = new List<byte>(Encoding.ASCII.GetBytes(message));
+            List<byte> sendBuffer = new List<byte>(Encoding.ASCII.GetBytes(JsonConvert.SerializeObject(data)));
             
+            // append the message length (in bytes)
+            sendBuffer.InsertRange(0, BitConverter.GetBytes(sendBuffer.Count));
+
+            // send the message
+            this.stream.Write(sendBuffer.ToArray(), 0, sendBuffer.Count);
+        }
+
+        public void SendData(DataPacket<JoinGamePacket> data)
+        {
+            // create the sendBuffer based on the message
+            List<byte> sendBuffer = new List<byte>(Encoding.ASCII.GetBytes(JsonConvert.SerializeObject(data)));
+
             // append the message length (in bytes)
             sendBuffer.InsertRange(0, BitConverter.GetBytes(sendBuffer.Count));
 

@@ -23,12 +23,13 @@ namespace Gui.ViewModels
         {
             this.client = new Client();
             this.client.OnDataReceived += Client_OnDataReceived;
+            this.client.OnInGameReceived += Client_OnInGameReceived;
             this.MainViewModel = mainViewModel;  
             joinGameCommand = new RelayCommand(() =>
             {
                 if (Name != null && Name.Length > 0)
                 {
-                    this.client.SendData("JOINGAME");
+                    this.client.SendJoinGame(Name);
                 }
             });
 
@@ -36,32 +37,23 @@ namespace Gui.ViewModels
             {
                 if (Name != null && Name.Length > 0)
                 {
-                    this.client.SendData("HOSTGAME");
+                    this.client.SendHostGame(Name);
                 }
             });
         }
 
+        private void Client_OnInGameReceived(bool state)
+        {
+            if (state)
+            {
+                MainViewModel.SelectedViewModel = new GameViewModel(this.MainViewModel);
+                MainViewModel.players.Add(new Models.Player(Name));
+            }
+        }
+
         private void Client_OnDataReceived(string data)
         {
-            switch (data)
-            {
-                case "HOSTSUCCEED":
-                    {
-                        MainViewModel.SelectedViewModel = new GameViewModel(this.MainViewModel);
-                        MainViewModel.players.Add(new Models.Player(Name));
-                        break;
-                    }
-                case "JOINSUCCEED":
-                    {
-                        MainViewModel.SelectedViewModel = new GameViewModel(this.MainViewModel);
-                        MainViewModel.players.Add(new Models.Player(Name));
-                        break;
-                    }
-                case "JOINFAILED":
-                    {
-                        break;
-                    }
-            }
+        
         }
     }
 }

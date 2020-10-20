@@ -4,14 +4,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gui", "Gui\Gui.csproj", "{711413E5-D82B-4379-B5AF-695ED3FF36FF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F847A80F-78C3-4B8D-92D4-4B4AF2465238} = {F847A80F-78C3-4B8D-92D4-4B4AF2465238}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCPServer", "TCPServer\TCPServer.csproj", "{B5A21FA3-FE30-4F13-8318-833B308FE0AA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCPClient", "TCPClient\TCPClient.csproj", "{F69F8810-10E2-4100-8218-F7B38A57FADB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerApplication", "Server\ServerApplication.csproj", "{B408EC63-C619-4454-A729-FF19BE595DE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerApplication", "Server\ServerApplication.csproj", "{B408EC63-C619-4454-A729-FF19BE595DE2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F847A80F-78C3-4B8D-92D4-4B4AF2465238} = {F847A80F-78C3-4B8D-92D4-4B4AF2465238}
+	EndProjectSection
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ServerUtils", "ServerUtils\ServerUtils.shproj", "{86B553A8-E631-4575-BB5C-93F58C73841B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EindopdrachtLib", "EindopdrachtLib\EindopdrachtLib.csproj", "{F847A80F-78C3-4B8D-92D4-4B4AF2465238}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		ServerUtils\ServerUtils.projitems*{86b553a8-e631-4575-bb5c-93f58c73841b}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -33,6 +46,10 @@ Global
 		{B408EC63-C619-4454-A729-FF19BE595DE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B408EC63-C619-4454-A729-FF19BE595DE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B408EC63-C619-4454-A729-FF19BE595DE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F847A80F-78C3-4B8D-92D4-4B4AF2465238}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F847A80F-78C3-4B8D-92D4-4B4AF2465238}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F847A80F-78C3-4B8D-92D4-4B4AF2465238}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F847A80F-78C3-4B8D-92D4-4B4AF2465238}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

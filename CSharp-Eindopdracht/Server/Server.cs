@@ -15,7 +15,7 @@ namespace ServerApplication
         public Server()
         {
             Console.WriteLine("Hello Server!");
-
+            
             games = new List<Game>();
 
             this.listener = new TcpListener(IPAddress.Any, 5252);
